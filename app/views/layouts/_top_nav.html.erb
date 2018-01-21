@@ -25,31 +25,30 @@
             <% end %>
           </ul>
         </li>
-        <li class="register-button">
-          <%= link_to 'Register', [:new, :user] %>
-        </li>
-          
-          <% if session[:user_id] == nil %>
-            <li class="register-button">
-              <%= link_to 'Login', [:new, :session] %>
-            </li>
-          <% end %>
+        <% if session[:user_id] == nil %>
+          <li class="register-button">
+            <%= link_to 'Register', [:new, :user] %>
+          </li>
+          <li class="register-button">
+            <%= link_to 'Login', [:new, :session] %>
+          </li>
+        <% end %>
   
   
           <% if session[:user_id] != nil %>
             <li class="register-button">
               <%= link_to 'Logout', '/logout' %>
             </li>
+            <span>
+              Logged in as: <%= session[:user_email] %>
+            </span>
           <% end %>
-  
-          <span>
-            Logged in as: <%= session[:user_id] %>
-          </span>
   
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
-       <li class="dropdown">
+        <% if session[:user_id] != nil %>
+        <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
             <span class="text-danger"><%= fa_icon 'lock', text: 'Admin' %></span>
@@ -66,6 +65,8 @@
             <%= fa_icon "shopping-cart" %> My Cart (<%= cart.size %>)
           <% end %>
         </li>
+        <% end %>
+        
       </ul>
     </div>
   </div>

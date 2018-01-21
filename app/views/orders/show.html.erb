@@ -6,7 +6,22 @@
 
   <div class="order-summary jumbotron">
     <h4>Thank you for your order!</h4>
+    <h4>You will get a receipt on this e-mail: <%= session[:user_email] %> </h4>
   </div>
+
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th colspan="2">Product</th>
+      <th>Description</th>
+      <th>Quantity</th>
+      <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+      <%= render @line_items %>
+    </tbody>
+  </table>
 
   <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
 
